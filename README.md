@@ -1,26 +1,16 @@
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+### Wazibook
+#### A project time manager
+
+Side project that I'm still taking some ideas out on.
+I'd like to make the time manager a web component then keep doing that with things that'd help development and such
+(why a blank menu).
 
 
-Hi there! Welcome to Cloud9 IDE!
+Made [https://wazibook.com](https://Wazibook.com)
+ to house project.  
 
-To get you started, we included a small hello world application.
+Email [i@jamiesmiths.com](mailto:i@jamiesmiths.com)
 
-1) Open the hello-world.html file
+#
 
-2) Click on the Preview button to open a live preview pane
-
-3) Make some changes to the file, save, watch the preview, and have fun!
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for documentation, or http://support.c9.io for support.
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+![alt text](http://i.imgur.com/F8UfAoj.png "mobile screenie")
