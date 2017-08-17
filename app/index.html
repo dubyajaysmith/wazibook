@@ -1,0 +1,231 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="generator" content="Jamie Smith">
+	<meta name="application-name" content="Smith's I/O">
+	<title>Timer</title>
+
+	<meta name="apple-mobile-web-app-title" content="Smith's I/O">
+	<meta name="application-name" content="Smith's I/O">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="//i.imgur.com/Fx2rQav.png">
+	<link rel="mask-icon" href="//i.imgur.com/Fx2rQav.png" color="#5bbad5">
+	<meta name="apple-mobile-web-app-status-bar-style" content="grey">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+	<link rel="icon" type="image/png" href="//i.imgur.com/Fx2rQav.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="//i.imgur.com/Fx2rQav.png" sizes="16x16">
+	<!-- Chrome for Android theme color -->
+	<meta name="theme-color" content="#35c73">
+	<link rel="manifest" href="manifest.json">
+	<meta name="msapplication-TileColor" content="#3372DF">
+	<meta name="msapplication-TileImage" content="//i.imgur.com/Fx2rQav.png">
+	<!-- Add to homescreen for Chrome on Android -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#00b2ff">
+	<!--<link rel="import" href="elements.html">-->
+
+	<!--firebase init-->
+	<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+	<link href="timer.css" rel="stylesheet" />
+	
+</head>
+
+<body>
+	
+	<div id="toast" style="display:none"></div>
+	
+	<div class="app-grid">
+		<div class="menu">
+			<div class="menuHeader">
+				<h1>WaziBook</h1>
+				<a class="logout" href="#">Log Out</a>
+			</div>
+		</div>
+		<div class="app">
+			
+
+			<div class="logSection ">
+				<div class="card white">
+					<h2 class="col helloMsg">Welcome</h2>
+					<div class="card-container">
+
+						<input class="email" type="email" placeholder="E-mail" />
+						<br/><br/>
+						<input class="password" type="password" placeholder="Password" />
+						
+						<div class="halfGrid">
+							<a class="btn signup" style="width:75%"  href="#">Sign Up</a>
+							<a class="btn login" style="width:75%"  href="#">Login</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="projForm">
+				<div class="card white">
+					
+					
+					<i class="material-icons menuIcon right">menu</i>
+					<h2 class="col helloMsg"></h2>
+		
+					<div class="halfGrid card-container">
+						
+						<div class="col">
+							Select a Project<br/>
+							<select id="pjSelect" style="">
+								<option style="center">--Select Project--</option>
+							</select>
+		                </div>
+						<div class="col">
+							<div id="newPjBlock">
+								<label for="pjInput">Add a Project</label><br />
+								<input id="pjInput" placeholder="Project Name" />
+							</div>
+						</div>
+		
+						
+		
+						<div class="col s6 m6 l6">
+							<label for="inputHour">Hour(s)</label><br />
+							<input id="inputHour" placeholder="Hour(s)" type="number">
+						</div>
+						<div class="col s6 m6 l6">
+							<label for="inputMin">Minutes</label><br />
+							<input id="inputMin" placeholder="Minutes" type="number">
+						</div>
+		
+						
+						
+						<div class="col s12 m12 l12">
+							<label for="inputDate">Add a Date</label><br />
+							<input id="inputDate" type="date" placeholder="Add a Date" class="datepicker">
+						</div>
+						<div class="input-field col s12 m12 l12">
+							<label for="inputComm">Comments</label><br />
+							<textarea id="inputComm" class="materialize-textarea" placeholder="Spot for comments"></textarea>
+						</div>
+						<div style="display:none">
+							<span class="time" style="font-size:2rem;"></span>
+							<a class="waves-effect waves-light btn-large matchWidth start" href="#">Start a Timer</a> &nbsp;
+							<a class="waves-effect waves-light btn-large matchWidth stop" style="display:none" href="#">Stop</a>
+						</div>
+					</div>
+					
+					<div class="col"></div>
+					<div class="col">
+						<a id="saveTime" class="right btn" href="#">Save Time</a>
+					</div>
+				</div>
+			</div>
+			<br />
+			<div class="projCard card white">
+				
+				<i title="Flip Weeks" class="material-icons right weekToggle primary-c" >restore</i>
+
+				<div class="card-container">
+		
+					<span id="projects"></span>
+		
+					<br />
+		
+					<div id="thisWeek" class="projToToggle projectList ">
+						<h3 class="card-title">This Week</h3>
+						<hr />
+		
+						<div id="projThisWeek" class="collection">
+						</div>
+					</div>
+		
+					<div id="lastWeek" class="projToToggle" style="display:none">
+						<h3 style="font-weight:300;font-size:1.5rem;">Last Week</h3>
+						<hr />
+						
+						<div id="projLastWeek" class="collection">
+						</div>
+					</div>
+		
+					<div id="newProject" class="projToToggle" style="display:none">
+						<h3 style="font-weight:300;font-size:1.5rem;">Settings</h3>
+						What's your name? <input class="displayName" type="text" />
+		
+						<a href="#!" id="updateUser" class="modal-action modal-close waves-effect waves-green btn-flat">Update</a> &nbsp; &nbsp;
+						<a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat toggleProject">Cancel</a>
+					</div>
+					
+				</div>
+				
+				<i id="toggleAllData" class="material-icons right">web</i>
+		
+			</div>
+		
+			<div id="allData" class="card white" style="display:none">
+					
+				<span class="card-title">All Data</span>&nbsp;
+				<table id="allDataTable" class="display" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>Project</th>
+			                <th>Date</th>
+			                <th>Hours</th>
+			                <th>Minutes</th>
+			                <th>Comments</th>
+			            </tr>
+			        </thead>
+			        <tfoot>
+			            <tr>
+			                <th>Project</th>
+			                <th>Date</th>
+			                <th>Hours</th>
+			                <th>Minutes</th>
+			                <th>Comments</th>
+			            </tr>
+			        </tfoot>
+			        <tbody id="allDataRows">
+			        </tbody>
+				</table>
+			        
+				
+			</div>
+			
+			<div class="circles">
+				<div class="circle-container">
+					  <div class="circle circle0"></div>
+					  <div class="circle circle1"></div>
+					  <div class="circle circle2"></div>
+					  <div class="circle circle3"></div>
+					  <div class="circle circle4"></div>
+					  <div class="circle circle5"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>-->
+<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="timer.js"></script>
+</html>
