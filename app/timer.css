@@ -93,6 +93,25 @@ a {
 	bottom: 0;
 }
 
+#toast {
+	width: 50%;
+	height: 20px;
+	height: auto;
+	position: absolute;
+	bottom: 10px;
+	background-color: #383838;
+	color: #F0F0F0;
+	font-size: 1.2rem;
+	padding: 10px;
+	text-align: center;
+	border-radius: 2px;
+	-webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	-moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	z-index: 999;
+}
+
+
 
 
 .menu {
@@ -321,7 +340,7 @@ a {
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.logout {
+#logout {
 	color: white;
 	vertical-align: middle;
 	margin-top: 0rem;
@@ -376,7 +395,7 @@ a {
 	}
 
 	.menu {
-		z-index: 999;
+		z-index: 40;
 	}
 
 	.grid {
@@ -537,7 +556,7 @@ a {
 	-moz-transition: all 1s ease;
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
-	z-index: 110;
+	z-index: 30;
 	color: #000;
 	cursor: pointer;
 	display: block;
@@ -570,24 +589,6 @@ a {
 	color: #000 !important;
 	background: #1de9b6;
 	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-}
-
-#toast {
-	width: 50%;
-	height: 20px;
-	height: auto;
-	position: absolute;
-	bottom: 10px;
-	background-color: #383838;
-	color: #F0F0F0;
-	font-size: 1.2rem;
-	padding: 10px;
-	text-align: center;
-	border-radius: 2px;
-	-webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
-	-moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
-	box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
-	z-index: 100;
 }
 
 

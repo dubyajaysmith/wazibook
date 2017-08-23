@@ -1,17 +1,13 @@
-/*global $, navigator, firebase*/
+/*global $, navigator, firebase getId getClass getTag */
 'use strict'
 
-const config = {
-	/*keys from firebase project*/
-};
-firebase.initializeApp(config);
 const dbRef = firebase.database().ref()
-const auth = firebase.auth();
-const getId = (x) => document.getElementById(x)
+const auth = firebase.auth()
 
 let pjName = []
 let oldProjs = []
 let timerRan = false
+
 let userDir, projects, user, accuracy, userId, timerTime, selProjName, pjs, editMode;
 
 editMode = false
@@ -20,7 +16,11 @@ const today = new Date()
 const lastWeek = new Date(today - (86400000 * 7))
 const last2Week = new Date(today - (86400000 * 14))
 
-$('.projForm, .projCard').hide()
+getId('projForm').style.display = 'none'
+getId('projCard').style.display = 'none'
+
+const WaziLogin = getTag('wazibook-login')
+
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
 	if (firebaseUser) {
@@ -30,13 +30,14 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 		userId = user.uid;
 		
 		
-		$('.projForm, .projCard').show()
+		getId('projForm').style.display = ''
+		getId('projCard').style.display = ''
 		
 		userDir = firebase.database().ref('users/' + userId + '/projects').orderByChild('date')
 		
 		
 		userDir.on('value', snap => {
-			//console.log('>>>>userDir')
+
 			let obj = snap.val()
 			pjs = obj
 			$.each(pjs, function(index, key) {
@@ -50,13 +51,15 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 				this.comm = this.comm ? this.comm : '(No Comments)'
 		
 				$('#allDataRows').append(
-					'<tr>' +
-						'<td>' + this.name + '</td>' +
-						'<td>' + d + '</td>' +
-						'<td>' + this.hour + '</td>' +
-						'<td>' + this.min + '</td>' +
-						'<td>' + this.comm + '</td>' +
-					'</tr>'
+					`
+					<tr>
+						<td> `+this.name+` </td>
+						<td> `+d+` </td>
+						<td> `+this.hour+` </td>
+						<td> `+this.min+` </td>
+						<td> `+this.comm+` </td>
+					</tr>
+					`
 				)
 				
 			})
@@ -76,13 +79,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 			$('.helloMsg').append('Hey ' + user.email.substring(0, '@'))
 		}
 
-		$('main').show()
-		$('.logSection').hide()
+		WaziLogin.style.display = 'none'
 	}
 	else {
 		mkToast('Not Logged In', 3000, 'rounded')
-		$('main').hide()
-		$('.logSection').show()
+		WaziLogin.style.display = ''
 	}
 })
 /*
@@ -91,41 +92,23 @@ $('.datepicker').pickadate({
 })
 */
 
-$('.login').on('click', function() {
-	//console.log('clicked')
-	// todo check for real email
-	const email = $('.email').val()
-	const pass = $('.password').val()
-	const auth = firebase.auth();
-	const promise = auth.signInWithEmailAndPassword(email, pass);
-	promise.catch(e => mkToast(e.message, 3000, 'rounded'));
-})
-$('.signup').on('click', function() {
-	//console.log('clicked')
-	// todo check for real email
-	const email = $('.email').val()
+console.dir(getTag('wazibook-login'))
 
-	if (validateEmail(email)) {
-		const pass = $('.password').val()
-		const auth = firebase.auth();
-		const promise = auth.createUserWithEmailAndPassword(email, pass);
-		promise.catch(e => mkToast(e.message, 3000, 'rounded'));
-	}
-	else {
-		mkToast('Email failed validation it did.')
-	}
-})
-$('.logout').on('click', function() {
+
+getId('logout').onclick = () => {
 	//console.log('clicked')
-	firebase.auth().signOut();
-})
+	firebase.auth().signOut()
+	getId('projForm').style.display = 'none'
+	getId('projCard').style.display = 'none'
+	getTag('wazibook-login').setAttribute('display', 'none')
+}
+
 $('body').on('click', '.editMode', function() {
 	
 	editMode = true
 	
 	const id = $(this).parent().children('.recName').prop('id')
-	getId('pjSelect')
-	
+
 	const name = $(this).parent().children('.recName').text()
 
 	Array.from(getId('pjSelect').options).filter((x) => {

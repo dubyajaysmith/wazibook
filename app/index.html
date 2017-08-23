@@ -12,7 +12,7 @@
 	<meta name="application-name" content="Smith's I/O">
 
 	<link rel="apple-touch-icon" sizes="180x180" href="//i.imgur.com/Fx2rQav.png">
-	<link rel="mask-icon" href="//i.imgur.com/Fx2rQav.png" color="#5bbad5">
+	<link rel="mask-icon" href="//i.imgur.com/Fx2rQav.png" color="#6effe8">
 	<meta name="apple-mobile-web-app-status-bar-style" content="grey">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -20,17 +20,14 @@
 	<link rel="icon" type="image/png" href="//i.imgur.com/Fx2rQav.png" sizes="32x32">
 	<link rel="icon" type="image/png" href="//i.imgur.com/Fx2rQav.png" sizes="16x16">
 	<!-- Chrome for Android theme color -->
-	<meta name="theme-color" content="#35c73">
+	<meta name="theme-color" content="#6effe8">
 	<link rel="manifest" href="manifest.json">
-	<meta name="msapplication-TileColor" content="#3372DF">
+	<meta name="msapplication-TileColor" content="#6effe8">
 	<meta name="msapplication-TileImage" content="//i.imgur.com/Fx2rQav.png">
 	<!-- Add to homescreen for Chrome on Android -->
 	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="theme-color" content="#00b2ff">
+	<meta name="theme-color" content="#6effe8">
 	<!--<link rel="import" href="elements.html">-->
-
-	<!--firebase init-->
-	<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
 
 	<!--Import Google Icon Font-->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i" rel="stylesheet" />
@@ -38,9 +35,22 @@
 	<link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
 	<link href="timer.css" rel="stylesheet" />
 	
+	<!--firebase init-->
+	<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+	<script>
+		/*firebase creds*/
+	</script>
+	
+	<!-- web component polyfill -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/custom-elements/1.0.0/custom-elements.min.js"></script>
+	<!-- Imports custom element -->
+    <link rel="import" href="wazibook-login.html" />
+    
+    
 </head>
 
 <body>
+	
 	
 	<div id="toast" style="display:none"></div>
 	
@@ -48,30 +58,14 @@
 		<div class="menu">
 			<div class="menuHeader">
 				<h1>WaziBook</h1>
-				<a class="logout" href="#">Log Out</a>
+				<a id="logout" href="#">Log Out</a>
 			</div>
 		</div>
 		<div class="app">
 			
-
-			<div class="logSection ">
-				<div class="card white">
-					<h2 class="col helloMsg">Welcome</h2>
-					<div class="card-container">
-
-						<input class="email" type="email" placeholder="E-mail" />
-						<br/><br/>
-						<input class="password" type="password" placeholder="Password" />
-						
-						<div class="halfGrid">
-							<a class="btn signup" style="width:75%"  href="#">Sign Up</a>
-							<a class="btn login" style="width:75%"  href="#">Login</a>
-						</div>
-					</div>
-				</div>
-			</div>
+			<wazibook-login ></wazibook-login>
 		
-			<div class="projForm">
+			<div id="projForm">
 				<div class="card white">
 					
 					
@@ -128,7 +122,7 @@
 				</div>
 			</div>
 			<br />
-			<div class="projCard card white">
+			<div id="projCard" class="card white">
 				
 				<i title="Flip Weeks" class="material-icons right weekToggle primary-c" >restore</i>
 
@@ -196,6 +190,8 @@
 			        
 				
 			</div>
+			
+			
 			
 			<div class="circles">
 				<div class="circle-container">

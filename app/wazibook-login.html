@@ -1,0 +1,306 @@
+<dom-module id="wazibook-login">
+	
+<template>
+	
+	<style>
+	
+		:host body {
+			font-family: 'Roboto', serif;
+			background: #d6d6d6;
+			/*position:absolute;*/
+			font-size: 1.2rem;
+			overflow-y: scroll;
+			overflow-x: hidden;
+			height: 100%;
+		}
+		
+		:host ul {
+		
+			list-style-type: none;
+		}
+		
+		:host input,
+		:host select,
+		:host textArea {
+			width: 100%;
+			text-align: center;
+			border: 1pt solid #1de9b6;
+			min-height: 3rem;
+			outline: none;
+		}
+		
+		:host input:focus,
+		:host select:focus,
+		:host textArea:focus {
+			border: 1pt solid #ff79b0 !important;
+		}
+		
+		:host a {
+			text-decoration: none;
+			color: #0097a7;
+		}
+		
+		
+
+		:host .btn {
+			font-size: 3rem;
+		}
+		:host .btn:link,
+		:host .btn:visited {
+			position: relative;
+			display: block;
+			margin: 30px auto 0;
+			padding: 14px 15px;
+			color: #000;
+			font-size: 2rem;
+			text-align: center;
+			text-decoration: none;
+			overflow: hidden;
+			letter-spacing: .08em;
+			border-radius: 0;
+			text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+			-webkit-transition: all 1s ease;
+			-moz-transition: all 1s ease;
+			-o-transition: all 1s ease;
+			transition: all 1s ease;
+		}
+		:host .btn:link:after,
+		:host .btn:visited:after {
+			content: "";
+			position: absolute;
+			height: 0%;
+			left: 50%;
+			top: 50%;
+			width: 150%;
+			z-index: -1;
+			-webkit-transition: all 0.75s ease 0s;
+			-moz-transition: all 0.75s ease 0s;
+			-o-transition: all 0.75s ease 0s;
+			transition: all 0.75s ease 0s;
+		}
+		:host .btn:link:hover,
+		:host .btn:visited:hover {
+			color: #FFF;
+			text-shadow: none;
+		}
+		:host .btn:link:hover:after,
+		:host .btn:visited:hover:after {
+			height: 450%;
+		}
+		:host .btn:link,
+		:host .btn:visited {
+			position: relative;
+			display: block;
+			margin: 30px auto 0;
+			padding: 14px 15px;
+			font-size: 1.2rem;
+			border-radius: 0;
+			text-align: center;
+			text-decoration: none;
+			overflow: hidden;
+			letter-spacing: .08em;
+			text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+			-webkit-transition: all 1s ease;
+			-moz-transition: all 1s ease;
+			-o-transition: all 1s ease;
+			transition: all 1s ease;
+			z-index: 110;
+			color: #000;
+			cursor: pointer;
+			display: block;
+			position: relative;
+			border: 2px solid #1de9b6;
+			transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+		}
+		:host .btn:hover {
+			color: #fff !important;
+			background-color: transparent;
+			text-shadow: ntwo;
+		}
+		:host .btn:hover:before {
+			top: 0%;
+			bottom: auto;
+			height: 100%;
+		}
+		:host .btn:before {
+			display: block;
+			position: absolute;
+			left: 0px;
+			bottom: 0px;
+			height: 0px;
+			width: 100%;
+			z-index: -1;
+			content: '';
+			color: #000 !important;
+			background: #1de9b6;
+			transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+		}
+		
+		
+		
+		
+		
+		:host .halfGrid {
+			display: grid;
+			grid-template-columns: 100%;
+			background: white;
+			text-align: center;
+			font-size: 1.2rem;
+		}
+		
+		:host .col {
+			border-radius: 5px;
+			padding: 1rem;
+		}
+		
+		:host .card {
+			border-radius: 2px;
+			display: inline-block;
+			height: auto;
+			position: relative;
+			width: 100%;
+			background: #FFF;
+			box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+			transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+			z-index: 20;
+			margin-bottom: 1.1rem;
+			opacity: .9;
+		}
+		:host .card:hover {
+			box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0 10px 0 rgba(0, 0, 0, 0.22);
+		}
+		:host .card-container {
+			padding: 2rem;
+		}
+		
+		:host .helloMsg {
+			margin-top: 0px;
+			padding-bottom: 4rem !important;
+			text-align: left;
+			font-size: 2rem;
+			background: #1de9b6;
+			color: white;
+			border: 1pt solid #1de9b6;
+			border-radius: 0rem !important;
+			box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+		}
+		
+		:host .card-container {
+			padding: 2rem;
+		}
+	</style>
+	
+	<section id="logSection">
+		<div class="card">
+			<h2 class="col helloMsg">Welcome</h2>
+			<div class="card-container">
+				
+				<input id="email" type="email" placeholder="E-mail" />
+				<br/><br/>
+				<input id="password" type="password" placeholder="Password" />
+				
+				<div class="halfGrid">
+					<a id="signup" class="btn" style="width:75%"  href="#">Sign Up</a>
+					<a id="login" class="btn" style="width:75%"  href="#">Login</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+</template>
+	
+<script>
+	console.log('wazibook-login script running... ')
+	/*global HTMLElement customElements firebase getId getClass getTag */
+	class WazibookLogin extends HTMLElement {
+			
+		// Fires when an instance of the element is created
+		createdCallback() {
+			console.log('wazibook-login created ')
+		};
+		
+		// Fires when an instance was inserted into the document
+		attachedCallback() {
+			console.log('inserted into the document')
+			const template = this.owner.querySelector('template')
+			const clone = document.importNode(template.content, true)
+			this.root = this.createShadowRoot()
+			this.root.appendChild(clone)
+			this.registerElements()
+			
+	    };
+
+	    // Fires when an instance was removed from the document
+	    detachedCallback() {
+	        console.log('detachedCallback ')
+	    };
+	    
+	    // Fires when an attribute was added, removed, or updated
+	    attributeChangedCallback(attr, oldVal, newVal) {
+	    	
+	    	console.log('attr hit ', 'attr', attr, 'oldVal',oldVal, 'newVal',newVal)
+	    	
+	        if(attr == 'display'){
+	        	this.dom.logSection.display = newVal
+	        }
+	        
+	    };
+	    
+	    
+		
+		registerElements() {
+			
+	    	console.log('registerElements')
+	    	
+			this.dom = {}
+			this.dom.logSection = this.root.getElementById('logSection')
+			this.dom.email = this.root.getElementById('email')
+			this.dom.password = this.root.getElementById('password')
+			
+			this.dom.signup = this.root.getElementById('signup')
+			this.dom.signup.onclick = () => {
+	
+				const email = this.dom.value
+			
+				if (validateEmail(email)) {
+					const pass = this.dom.password.value
+					const auth = firebase.auth();
+					const promise = auth.createUserWithEmailAndPassword(email, pass);
+					promise.catch(e => console.log(e));//todo mkToast(e.message, 3000, 'rounded')
+				}
+				else {
+					//todo mkToast('Email failed validation it did.')
+				}
+			}
+
+			this.dom.login = this.root.getElementById('login')
+			console.dir(this.dom.login)
+			this.dom.login.onclick = () => {
+				
+				const email = this.dom.email.value
+					,pass = this.dom.password.value
+					,auth = firebase.auth()
+				;
+				
+				const promise = auth.signInWithEmailAndPassword(email, pass);
+				promise.catch(e => console.log(e.message));
+				//todo mkToast(e.message, 3000, 'rounded')
+			}
+		}
+	}
+	
+	// Registers custom element; Note customElements.define() broke stuffs
+	//customElements.define('wazibook-login', WazibookLogin);
+	if (document.createElement('wazibook-login').constructor !== WazibookLogin) {
+		WazibookLogin.prototype.owner = (document._currentScript || document.currentScript).ownerDocument;
+	    document.registerElement('wazibook-login', WazibookLogin);
+	}
+	
+	//Helper funcs
+	function validateEmail(email) {
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+	}
+</script>
+
+</dom-module>
